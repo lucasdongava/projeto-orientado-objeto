@@ -48,6 +48,13 @@ code,pre,.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
 .icon-btn{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);display:grid;place-items:center;flex-shrink:0}
 .icon-btn:hover{border-color:var(--acc)}
 .menu-btn{display:none}
+.collapse-btn{display:none}
+/* computador: botao recolhe/mostra a sidebar (no celular continua o menu em gaveta) */
+@media (min-width:761px){
+  .collapse-btn{display:grid}
+  body.side-off .app{grid-template-columns:minmax(0,1fr)}
+  body.side-off .side{display:none}
+}
 #themeBtn{font-size:18px}
 
 /* ===== sidebar ===== */
