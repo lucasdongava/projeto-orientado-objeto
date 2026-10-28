@@ -30,8 +30,12 @@ function lessonScore(L) {
   const solvable = L.ex.map((x, j) => j).filter(j => !L.ex[j].ans), E = solvable.length, solved = solvable.filter(j => STATS.isSolved(`${L.id}:ex${j}`)).length;
   const isDone = done.has(L.id);
   const started = answered || solved || isDone;
-  const qScore = T ? right / T : (isDone ? 1 : 0), eScore = E ? solved / E : 1;
-  const score = Math.round((0.5 * qScore + 0.35 * eScore + 0.15 * (isDone ? 1 : 0)) * 100);
+  // só entram no cálculo as partes que a aula realmente tem; aula não iniciada vale 0
+  const parts = [[0.15, isDone ? 1 : 0]];
+  if (T) parts.push([0.5, right / T]);
+  if (E) parts.push([0.35, solved / E]);
+  const wsum = parts.reduce((a, p) => a + p[0], 0);
+  const score = started ? Math.round(parts.reduce((a, p) => a + p[0] * p[1], 0) / wsum * 100) : 0;
   const acc = answered ? right / answered : null;
   let st = !started ? 'novo' : (acc !== null && acc < 0.5) ? 'reforcar' : score >= 75 ? 'ok' : score >= 45 ? 'atencao' : 'reforcar';
   return { score, st, T, answered, right, E, solved, isDone, acc };
