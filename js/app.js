@@ -5,6 +5,8 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem('poo:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem('poo:' + k, JSON.stringify(v)); } catch (e) {} }
 };
+// pede ao navegador para não apagar o progresso sozinho (não protege contra limpeza manual)
+try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const LV = { f: 'Fácil', m: 'Médio', d: 'Desafio' };
 const done = new Set(store.get('done', []));
