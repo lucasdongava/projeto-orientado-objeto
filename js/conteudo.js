@@ -678,7 +678,7 @@ const PLAN = [
   ['Sem 7', 'MER → tabelas, chaves e mapeamento para classes.'],
   ['Sem 8', 'Script SQL e DB First. Revise o resumo e as provas anteriores.']
 ];
-const METODO = `<div class="method">
+let METODO = `<div class="method">
   <div class="method-h"><b>Para modelar qualquer cenário</b><button class="btn" data-method>Ver exemplo</button></div>
   <ol class="steps"><li><b>Grife os substantivos</b> do enunciado: viram candidatos a classes e atributos.</li><li><b>Grife os verbos</b> que ligam substantivos: viram relacionamentos (e métodos).</li><li><b>Pergunte a quantidade</b> dos dois lados: viram as multiplicidades.</li><li><b>Pergunte se a parte vive sem o todo</b>: decide agregação ou composição.</li></ol>
   <div class="method-ex"><div>
