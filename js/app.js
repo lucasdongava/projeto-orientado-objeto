@@ -37,7 +37,7 @@ let toastT; function toast(msg) { const t = $('#toast'); t.textContent = msg; t.
 
 // ---------- sidebar ----------
 function renderSide() {
-  let h = `<div class="side-head"><div><b>${T('sideLessons')}</b><small>${T('sideCount', done.size, LESSONS.length)}</small></div><button class="icon-btn" data-close aria-label="${T('closeMenuAria')}">✕</button></div><div class="nav-home"><button data-go="inicio" class="${view === 'inicio' ? 'on' : ''}">${T('navHome')}</button><button data-go="painel" class="${view === 'painel' ? 'on' : ''}">${T('navProg')}</button><button data-go="resumo" class="${view === 'resumo' ? 'on' : ''}">${T('navSummary')}</button></div>`;
+  let h = `<div class="side-head"><div><b>${T('sideLessons')}</b><small>${T('sideCount', done.size, LESSONS.length)}</small></div><button class="icon-btn" data-close aria-label="${T('closeMenuAria')}">✕</button></div><div class="nav-home"><button data-go="inicio" class="${view === 'inicio' ? 'on' : ''}">${T('navHome')}</button><button data-go="painel" class="${view === 'painel' ? 'on' : ''}">${T('navProg')}</button><button data-go="resumo" class="${view === 'resumo' ? 'on' : ''}">${T('navSummary')}</button><button data-go="provas" class="${view === 'provas' ? 'on' : ''}">${T('navExams')}</button></div>`;
   for (const u of [0, 1, 2, 3]) {
     h += `<div class="unit"><div class="unit-h"><b style="background:${UNITS[u].color}">${u || '★'}</b>${UNITS[u].name}</div>`;
     for (const L of LESSONS.filter(l => l.unit === u))
@@ -103,6 +103,7 @@ function renderHome() {
   <div class="hero"><b>${T('continueH')}</b><span style="color:var(--fg2)">${esc(last.title)}${last.unit ? T('unitWord', last.unit) : ''}</span><button class="btn pri" data-go="${last.id}">${T('openLesson')}</button></div>
   <button class="unit-card" data-go="ferramentas" style="width:100%;border-color:var(--acc);margin-bottom:8px"><span class="n" style="color:var(--acc)">${T('startHere')}</span><b>${T('howStudy')}</b><span>${T('howStudyD')}</span></button>
   <button class="unit-card rs-cta" data-go="resumo" style="width:100%;margin-bottom:8px"><span class="n" style="color:var(--acc)">${T('examSoon')}</span><b>${T('sum3')}</b><span>${T('sum3d')}</span></button>
+  <button class="unit-card" data-go="provas" style="width:100%;margin-bottom:8px"><span class="n" style="color:var(--acc)">${T('homeExamsTag')}</span><b>${T('homeExamsB')}</b><span>${T('homeExamsD')}</span></button>
   <button class="unit-card" data-go="painel" style="width:100%;margin-bottom:8px"><span class="n" style="color:var(--fg3)">${T('panelTag')}</span><b>${T('yourProg')}</b><span>${T('yourProgD')}</span></button>
   <h2>${T('unitsH')}</h2><div class="unit-cards">`;
   for (const u of [1, 2, 3]) {
@@ -119,7 +120,7 @@ const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 function reveal(root) {
   if (!('IntersectionObserver' in window) || reduced()) return;
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
-  root.querySelectorAll('.crumb,h1,.lead,h2,.note,.snip,.viz,.fig,.tbl-wrap,.prova,.quiz .q,.method,.ex,.card,.unit-card,.hero,.week,.lesson-foot').forEach(n => {
+  root.querySelectorAll('.crumb,h1,.lead,h2,.note,.snip,.viz,.fig,.tbl-wrap,.prova,.quiz .q,.pq,.method,.ex,.card,.unit-card,.hero,.week,.lesson-foot').forEach(n => {
     n.classList.add('rv'); const sib = [...n.parentElement.children].filter(c => c.classList.contains('rv')); n.style.transitionDelay = Math.min(sib.indexOf(n), 5) * 55 + 'ms'; io.observe(n);
   });
 }
@@ -141,7 +142,7 @@ function render(id, keepScroll) {
   view = id; closeDrawer();
   const L = LESSONS.find(l => l.id === id);
   const li = $('#lessonIn');
-  li.innerHTML = L ? renderLesson(L) : id === 'painel' ? renderPainel() : id === 'resumo' ? renderResumo() : renderHome();
+  li.innerHTML = L ? renderLesson(L) : id === 'painel' ? renderPainel() : id === 'resumo' ? renderResumo() : id === 'provas' ? renderProvas() : renderHome();
   if (id === 'painel') requestAnimationFrame(() => li.querySelectorAll('.ring-fg').forEach(c => c.classList.add('go')));
   li.classList.remove('leave');
   if (!keepScroll) reveal(li);
@@ -175,6 +176,6 @@ $('#lessonIn').addEventListener('click', e => {
 // ---------- início ----------
 (() => {
   const h = (location.hash || '').slice(1);
-  go(LESSONS.some(l => l.id === h) || h === 'painel' || h === 'resumo' ? h : 'inicio');
+  go(LESSONS.some(l => l.id === h) || h === 'painel' || h === 'resumo' || h === 'provas' ? h : 'inicio');
 })();
 

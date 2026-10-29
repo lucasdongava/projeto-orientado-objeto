@@ -37,6 +37,11 @@ const I18N = {
     wrongTimes: w => ` · errou ${w}×`, noWrong: 'Nenhuma questão errada registrada ainda. 👏', whereGood: 'Onde você está tranquilo',
     goodScore: (s, r, t, so, e) => `${s}% · ${r}/${t} no teste · ${so}/${e} exercícios`, noGood: 'Quando uma aula passar de 75% de domínio, ela aparece aqui.',
     resetBtn: 'Zerar progresso', resetAsk: 'Apagar respostas, erros e exercícios resolvidos deste aparelho?', resetYes: 'Sim, zerar', resetNo: 'Cancelar',
+    navExams: 'Provas', prCrumb: 'Revisão para a prova', prTitle: 'Provas anteriores',
+    prLead: 'Questões das provas da disciplina (2025/2, 2026/1 e 2026/2), com os gabaritos e padrões de resposta que constam no material do AVA. Responda e confira.',
+    prQ: n => 'Questão ' + n, prNoKey: 'O material do AVA não traz o gabarito desta questão.', prKey: 'Gabarito:', prPadrao: 'Padrão de resposta', prSeePadrao: 'Ver padrão de resposta', prHidePadrao: 'Esconder padrão de resposta',
+    prTrue: 'V', prFalse: 'F', prScore: (a, b) => a + ' de ' + b + ' acertos', prRedo: '↺ Refazer',
+    homeExamsTag: 'PROVAS ANTERIORES', homeExamsB: 'Questões das provas com gabarito', homeExamsD: 'Provas de 2025/2 e 2026/2 com gabarito e padrão de resposta, e a prova final de revisão de 2026/1.',
     rsReview: 'Revisão para a prova'
   },
   en: {
@@ -76,6 +81,11 @@ const I18N = {
     wrongTimes: w => ` · missed ${w}×`, noWrong: 'No wrong answers recorded yet. 👏', whereGood: 'Where you are solid',
     goodScore: (s, r, t, so, e) => `${s}% · ${r}/${t} on the quiz · ${so}/${e} exercises`, noGood: 'When a lesson passes 75% mastery, it shows up here.',
     resetBtn: 'Reset progress', resetAsk: 'Erase answers, mistakes and solved exercises on this device?', resetYes: 'Yes, reset', resetNo: 'Cancel',
+    navExams: 'Exams', prCrumb: 'Exam review', prTitle: 'Past exams',
+    prLead: 'Questions from the course exams (2025/2, 2026/1 and 2026/2), with the answer keys and answer patterns that appear in the AVA material. Answer and check.',
+    prQ: n => 'Question ' + n, prNoKey: 'The AVA material does not include the answer key for this question.', prKey: 'Answer key:', prPadrao: 'Answer pattern', prSeePadrao: 'See answer pattern', prHidePadrao: 'Hide answer pattern',
+    prTrue: 'T', prFalse: 'F', prScore: (a, b) => a + ' of ' + b + ' correct', prRedo: '↺ Redo',
+    homeExamsTag: 'PAST EXAMS', homeExamsB: 'Exam questions with answer keys', homeExamsD: 'The 2025/2 and 2026/2 exams with answer keys and answer patterns, and the 2026/1 final review exam.',
     rsReview: 'Exam review'
   }
 };
