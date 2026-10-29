@@ -11,8 +11,8 @@ const curTheme = () => document.documentElement.dataset.theme || 'light';
 async function renderMermaid(root) {
   const nodes = [...root.querySelectorAll('.mmd')].filter(n => n.dataset.theme !== curTheme());
   if (!nodes.length) return;
-  nodes.forEach(n => { if (!n.dataset.theme) n.innerHTML = '<div class="mmd-load">desenhando diagrama…</div>'; });
-  let m; try { m = await loadMermaid(); } catch (e) { nodes.forEach(n => { n.innerHTML = '<div class="mmd-load">Conecte-se à internet para ver este diagrama.</div>'; }); return; }
+  nodes.forEach(n => { if (!n.dataset.theme) n.innerHTML = '<div class="mmd-load">' + T('drawing') + '</div>'; });
+  let m; try { m = await loadMermaid(); } catch (e) { nodes.forEach(n => { n.innerHTML = '<div class="mmd-load">' + T('needNet') + '</div>'; }); return; }
   const v = n => cssv(n);
   m.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'base', fontFamily: 'Geist, system-ui, sans-serif',
     themeVariables: { fontSize: '14px', background: v('--bg'), primaryColor: v('--panel2'), primaryTextColor: v('--fg'), primaryBorderColor: v('--fg3'), lineColor: v('--fg2'), secondaryColor: v('--acc-s'), tertiaryColor: v('--bg'), mainBkg: v('--panel2'), nodeBorder: v('--fg3'), textColor: v('--fg'), noteBkgColor: v('--warn-s'), noteTextColor: v('--fg'), noteBorderColor: v('--warn'), actorBkg: v('--panel2'), actorBorder: v('--fg3'), actorTextColor: v('--fg'), actorLineColor: v('--fg3'), signalColor: v('--fg'), signalTextColor: v('--fg'), labelBoxBkgColor: v('--acc-s'), labelBoxBorderColor: v('--acc'), labelTextColor: v('--fg'), loopTextColor: v('--fg'), activationBkgColor: v('--acc-s'), activationBorderColor: v('--acc'), attributeBackgroundColorOdd: v('--bg'), attributeBackgroundColorEven: v('--panel2') },
