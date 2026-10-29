@@ -983,3 +983,8 @@ a.logo:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radi
 .pv-sub p{margin:0 0 8px}
 .pva>div b{display:block;margin-bottom:6px;color:var(--fg)}
 @media (max-width:600px){.pv-row{grid-template-columns:1fr}}
+/* codigo do AVA: bloco com resultado da execucao */
+.snip-o{border-top:1px solid var(--code-line)}
+.snip pre+.snip-o+pre{border-top:0;color:var(--fg2)}
+#lessonIn h3{font-size:17px;letter-spacing:-.02em;margin:20px 0 6px}
+.cap{color:var(--fg2);font-size:13.5px}
